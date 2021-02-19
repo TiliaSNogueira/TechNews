@@ -26,9 +26,12 @@ class ListaNoticiasActivity : AppCompatActivity() {
         ListaNoticiasAdapter(context = this)
     }
 
+    private val repository by lazy {
+        NoticiaRepository(AppDatabase.getInstance(this).noticiaDAO)
+    }
+
 
     private val viewModel by lazy {
-        val repository = NoticiaRepository(AppDatabase.getInstance(this).noticiaDAO)
         val factory = ListaNoticiasViewModelFactory(repository)
         val provedor = ViewModelProviders.of(this, factory)
         provedor.get(ListaNoticiasViewModel::class.java)
