@@ -7,13 +7,11 @@ import br.com.alura.technews.model.Noticia
 import br.com.alura.technews.repository.NoticiaRepository
 import br.com.alura.technews.repository.Resource
 
-class VizualizaNoticiaViewModel (private val id: Long, private val repository: NoticiaRepository) : ViewModel() {
+class VizualizaNoticiaViewModel (id: Long, private val repository: NoticiaRepository) : ViewModel() {
 
     //mandamos o id em vez da noticia pq assim o viewModel que fica com a responsabilidade de buscar e manter a noticia
     //a activity fica livre da responsabilidade de remover noticia
-    private val noticiaEncontrada = buscaPorId()
-
-    fun buscaPorId() = repository.buscaPorId(id)
+    val noticiaEncontrada = repository.buscaPorId(id)
 
 
     fun remove() : LiveData<Resource<Void?>> {

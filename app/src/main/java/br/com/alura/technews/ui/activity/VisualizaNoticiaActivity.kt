@@ -42,12 +42,13 @@ class VisualizaNoticiaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_visualiza_noticia)
         title = TITULO_APPBAR
         verificaIdDaNoticia()
-    }
-
-    override fun onResume() {
-        super.onResume()
         buscaNoticiaSelecionada()
     }
+//não precisa mais do onResume pois o armazenamento está como LiveData então atualiza automaticamente
+//    override fun onResume() {
+//        super.onResume()
+//        buscaNoticiaSelecionada()
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.visualiza_noticia_menu, menu)
@@ -63,7 +64,7 @@ class VisualizaNoticiaActivity : AppCompatActivity() {
     }
 
     private fun buscaNoticiaSelecionada() {
-        viewModel.buscaPorId().observe(this, Observer {
+        viewModel.noticiaEncontrada.observe(this, Observer {
             if (it != null) {
                 this.noticia = it
                 preencheCampos(it)
